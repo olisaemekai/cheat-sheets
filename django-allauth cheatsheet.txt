@@ -1,0 +1,38 @@
+Working with django-allauth package
+
+If you've not created a virtual environment:
+1. Create a virtual environment for your project
+2. Install django
+3. Start a project using: django-admin startproject [project_name]
+#4. Start an app using: python manage.py startapp [app_name]
+4. Run migrations with: python manage.py migrate
+
+If you've not installed django-allauth:
+Install django-allauth with: pip install django-allauth
+
+Next update the settings.py file of your project:
+i. first add the following to INSTALLED_APPS:
+	'django.contrib.sites',
+    	'allauth',
+	'allauth.account',
+    	'allauth.socialaccount',
+n.b.: ensure they're under the default django apps.
+
+ii. At the bottom of settings.py, specify the following allauth backend setting:
+	AUTHENTICATION_BACKENDS = (
+    		"django.contrib.auth.backends.ModelBackend",
+   		"allauth.account.auth_backends.AuthenticationBackend",
+		)
+iii. Also add the SITE_ID too:
+	SITE_ID = 1
+iv. You may add LOGIN_REDIRECT_URL too, maybe to home
+	LOGIN_REDIRECT_URL = 'home'
+
+v. Add django-allauth to the project's urls.py file (after the admin url):
+	urlpatterns= [	...
+			path('accounts/', include('allauth.urls')),
+			]
+vi. Then run migrations with: python manage.py migrate
+
+
+To override the default

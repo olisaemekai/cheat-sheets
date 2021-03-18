@@ -1,0 +1,100 @@
+1. Install virtual environment with:
+	pip install virtualenv
+NB: I have already installed this
+
+2. You should create your project directory (folder)
+
+3. Then create virtural environment in the project directory
+	virtualenv [name you wish to call the environment]
+	e.g virtualenv py1  
+
+4. Activate the virtual environment:
+	[name you wish to call the virtual environment]\scripts\activate
+	E.g.: py1\scripts\activate
+
+5. Then install Django in the virtual environment:
+	pip install django
+
+6. Starting a project:
+	django-admin startproject [project_name]
+
+7. Creating a Database:
+	python manage.py migrate #(ensure you are within the [project_name] directory)
+
+8. Creating Apps:
+	python manage.py startapp [app_name] #(ensure you are within the [project_name] directory)
+
+9. Install(add/register) the created app within INSTALLED_APPS in settings.py file 
+
+
+Working on url within the app:
+	ensure you import neccesary views 	
+	path() function:path(route, view, name(this is optional, but a good practice))
+	example:
+urlpatterns = [
+	path('', view.index, name ='index')
+]
+
+Working on the project's url:
+	ensure you import include from django.urls
+	add path(route, include(app_urls)) to the url patterns; see example below:
+	path('', include('pages.urls')) where pages == [app_name]
+
+Creating models:
+	ensure you import models from django.db
+	create model class that inherits from models.Model 
+	define model(table) fields.. specify neccesary options
+	define __str__ method for the class models for human-readable representation of model objects in admin sites
+	
+	After creating the model class, you can run: 'python manage.py check' to check if the model was entered correctly
+		
+	After checking the model class, you should make migrations with:
+		python manage.py makemigrations [app_name]
+	After that, run migrations with:
+		python manage.py migrate
+	
+NB: whenever you make change to the structure of the model (database tables), ensure you make and run migrations
+
+	
+Registering model in the admin.py file:
+	import the model class(es) from the .models.py
+	then: admin.site.register([model-class name])
+
+	creating admin user (superuser)
+		python manage.py createsuperuser
+		Then enter username(commonly admin), email address, and password
+	
+	you can customize the admin site by defining model_admin classes that inherit from admin.ModelAdmin class
+	within the model-admin class, you can specify: 
+		list_display : this specifies the fields to be displayed in the list of records in the admin site for the model (i.e. table columns) 
+		ordering: this specifies the ordering of records in the table
+		search_fields: specifies the fields to be searched when using the search bar in the model admin
+		list_filter: specifies the fields the could be used to filter
+		fieldsets: used to make groups for the fields of a table (check your previous projects for more explanation)
+		ordering: used to specify the fields by which the table will be ordered
+		NB: there are more options available; check the documentation
+		NB: ensure you register your modeladmin
+		   
+ Template Settings:
+	change template to look like this:
+		'DIRS': [
+           		 os.path.join(BASE_DIR, 'templates')
+          		],
+
+
+To work with Django interactive shell:
+	py manage.py shell 
+
+To runserver in insecure mode:
+	python manage.py runserver --insecure (ensure DEBUG is set to False, and ALLOWED_HOST = ['127.0.0.1'])
+
+Working with form
+. create the forms.py file
+. create the form class or formmodel class
+. create the view function to handle the form's logic
+. create the template for displaying the form on the browser
+. add the urlconfs for the view. Ensure the app's url is included in the site's url pattern
+
+	
+
+ 

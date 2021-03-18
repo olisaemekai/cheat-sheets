@@ -1,0 +1,22 @@
+. git init // Initialize local git repository
+
+. git config --global user.name 'Olisaemeka Isife'
+. git config --global user.email 'olisaemekafredrick@gmail.com'
+
+. git add <file> // Add files to index
+Eg. git add index.html // to add index.html
+    git add . // to add everything in the current directory
+    git add *.html // to add all files with .html extention
+
+. git rm --cached <file> // to remove files add to the local repo
+
+. git status  // chech status of working tree
+
+. git commit // commit changes in index
+Eg. git commit -m 'initial commit' // note: the comment is enclosed in ' '
+
+. git push // push to remote repository
+
+. git pull // pull latest from remote repository
+
+. git clone // clone repository into a new directory
